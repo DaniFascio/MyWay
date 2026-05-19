@@ -7,11 +7,230 @@
   <title>MyWay Tennis Academy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+  <style>
+    /* ===== WIP PAGE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <!-- ===== NAVBAR ===== -->
+    html, body {
+      height: 100%;
+      font-family: 'Montserrat', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #1A1A1A;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    .wip-orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .wip-orb--1 {
+      width: 700px; height: 700px;
+      top: -200px; right: -200px;
+      background: radial-gradient(circle at 40% 40%, rgba(255,209,0,.14), rgba(240,122,0,.07) 55%, transparent 80%);
+    }
+    .wip-orb--2 {
+      width: 500px; height: 500px;
+      bottom: -150px; left: -150px;
+      background: radial-gradient(circle, rgba(240,122,0,.09), transparent 70%);
+    }
+    .wip-ball {
+      position: fixed;
+      right: -5vw; bottom: -10vw;
+      width: clamp(300px, 45vw, 700px);
+      height: clamp(300px, 45vw, 700px);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFD100 0%, #F07A00 100%);
+      opacity: .04;
+      pointer-events: none;
+    }
+    .wip-card {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: clamp(40px, 6vw, 80px) clamp(28px, 5vw, 80px);
+      max-width: 580px;
+      width: 90%;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 24px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 40px 100px rgba(0,0,0,.45);
+    }
+    .wip-logo {
+      height: 52px; width: auto;
+      margin: 0 auto 40px;
+      display: block;
+    }
+    .wip-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #FFD100;
+      margin-bottom: 20px;
+    }
+    .wip-tag::before, .wip-tag::after {
+      content: '';
+      width: 22px; height: 2px;
+      background: linear-gradient(135deg, #FFD100 0%, #F07A00 100%);
+      flex-shrink: 0;
+    }
+    .wip-title {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+    .wip-gradient {
+      background: linear-gradient(135deg, #FFD100 0%, #F07A00 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .wip-desc {
+      font-size: .97rem;
+      color: rgba(255,255,255,.5);
+      line-height: 1.8;
+      max-width: 400px;
+      margin: 0 auto 40px;
+    }
+    .wip-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .wip-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.7);
+      font-size: .82rem;
+      font-weight: 600;
+      text-decoration: none;
+      font-family: inherit;
+      transition: all .25s ease;
+    }
+    .wip-link:hover {
+      border-color: rgba(240,122,0,.5);
+      background: rgba(240,122,0,.1);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .wip-link svg {
+      width: 15px; height: 15px;
+      stroke: currentColor;
+      flex-shrink: 0;
+    }
+    .wip-progress-wrap {
+      background: rgba(255,255,255,.06);
+      border-radius: 50px;
+      height: 4px;
+      overflow: hidden;
+    }
+    .wip-progress-bar {
+      height: 100%;
+      width: 65%;
+      background: linear-gradient(135deg, #FFD100 0%, #F07A00 100%);
+      border-radius: 50px;
+      box-shadow: 0 0 14px rgba(240,122,0,.5);
+      animation: wipPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes wipPulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: .65; }
+    }
+    .wip-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.28);
+      margin-top: 10px;
+    }
+    @media (max-width: 420px) {
+      .wip-contacts { flex-direction: column; align-items: center; }
+      .wip-link { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body class="wip-body">
+
+  <!-- ===== WORK IN PROGRESS ===== -->
+  <div class="wip-orb wip-orb--1"></div>
+  <div class="wip-orb wip-orb--2"></div>
+  <div class="wip-ball"></div>
+
+  <div class="wip-card">
+    <img src="assets/myway%20logo.png" alt="MyWay Tennis Academy" class="wip-logo">
+
+    <div class="wip-tag">In costruzione</div>
+
+    <h1 class="wip-title">Stiamo costruendo<br><span class="wip-gradient">qualcosa di grande.</span></h1>
+
+    <p class="wip-desc">Il nuovo sito di MyWay Tennis Academy sarà presto online. Nel frattempo puoi contattarci direttamente.</p>
+
+    <div class="wip-contacts">
+      <a href="tel:+393939270855" class="wip-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        +39 393 927 0855
+      </a>
+      <a href="mailto:mywayssd@gmail.com" class="wip-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        mywayssd@gmail.com
+      </a>
+      <a href="https://www.instagram.com/mywaytennis/" class="wip-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+        @mywaytennis
+      </a>
+    </div>
+
+    <div class="wip-progress-wrap">
+      <div class="wip-progress-bar"></div>
+    </div>
+    <div class="wip-progress-label">
+      <span>Lavori in corso</span>
+      <span>65%</span>
+    </div>
+  </div>
+  <!-- ===== /WORK IN PROGRESS ===== -->
+
+
+  <!--
+  ===============================================================
+  SITO COMPLETO — commentato temporaneamente per WIP
+  Per ripristinare: rimuovi questo blocco commento e cancella la
+  sezione WIP qui sopra (e gli stili .wip-* nel <head>).
+  ===============================================================
+
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#home" class="nav-logo">
@@ -34,7 +253,6 @@
   </nav>
   <div class="nav-overlay" id="nav-overlay"></div>
 
-  <!-- ===== HERO ===== -->
   <section id="home" class="hero">
     <div class="hero-bg">
       <div class="hero-orb hero-orb--1"></div>
@@ -55,7 +273,6 @@
     </a>
   </section>
 
-  <!-- ===== CHI SIAMO ===== -->
   <section id="chi-siamo" class="about section">
     <div class="container">
       <div class="about-grid">
@@ -92,7 +309,6 @@
     </div>
   </section>
 
-  <!-- ===== PROGRAMMI ===== -->
   <section id="programmi" class="programs section section--alt">
     <div class="container">
       <div class="section-header">
@@ -163,41 +379,6 @@
     </div>
   </section>
 
-  <!--
-  ===== METODO (commentato) =====
-  <section id="metodo" class="method section section--dark">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag section-tag--light">Il Nostro Metodo</span>
-        <h2 class="section-title section-title--light">Quattro pilastri per<br>la tua crescita.</h2>
-      </div>
-      <div class="method-grid">
-        <div class="method-item">
-          <span class="method-number">01</span>
-          <h3>Tecnica Analitica</h3>
-          <p>Analisi biomeccanica del movimento per ottimizzare ogni colpo.</p>
-        </div>
-        <div class="method-item">
-          <span class="method-number">02</span>
-          <h3>Tattica di Gioco</h3>
-          <p>Sviluppo del pensiero tattico attraverso simulazioni di match.</p>
-        </div>
-        <div class="method-item">
-          <span class="method-number">03</span>
-          <h3>Preparazione Fisica</h3>
-          <p>Programmi atletici specifici per il tennis.</p>
-        </div>
-        <div class="method-item">
-          <span class="method-number">04</span>
-          <h3>Training Mentale</h3>
-          <p>Sviluppo della resilienza mentale e gestione della pressione.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  -->
-
-  <!-- ===== ACCADEMIA — PUZZLE ===== -->
   <section id="accademia" class="puzzle-section">
     <div class="container">
       <div class="puzzle-header">
@@ -205,24 +386,18 @@
         <h2 class="section-title section-title--light">Dove la passione<br>diventa <em class="contact-em">risultato.</em></h2>
       </div>
       <div class="puzzle-grid">
-
-        <!-- A: campo indoor — landscape wide -->
         <div class="puzzle-cell puzzle-cell--a">
           <img src="assets/photo-indoor-court.jpg" alt="Campo indoor MyWay Tennis Academy" loading="lazy">
           <div class="puzzle-overlay">
             <span>Campi Indoor</span>
           </div>
         </div>
-
-        <!-- B: coaches — portrait tall -->
         <div class="puzzle-cell puzzle-cell--b">
           <img src="assets/photo-coaches.jpg" alt="Staff MyWay Tennis Academy" loading="lazy">
           <div class="puzzle-overlay">
             <span>Il Nostro Staff</span>
           </div>
         </div>
-
-        <!-- C: stats block -->
         <div class="puzzle-cell puzzle-cell--c puzzle-cell--text">
           <div class="puzzle-text-inner">
             <span class="puzzle-stat-num">200<sup>+</sup></span>
@@ -230,20 +405,16 @@
             <a href="#contatti" class="btn btn-primary btn-sm" style="margin-top:auto;">Inizia ora</a>
           </div>
         </div>
-
-        <!-- D: ragazze — campo esterno -->
         <div class="puzzle-cell puzzle-cell--d">
           <img src="assets/photo-court-girls.jpg" alt="Atleti MyWay Tennis Academy" loading="lazy">
           <div class="puzzle-overlay">
             <span>I Nostri Atleti</span>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ===== STAFF ===== -->
   <section id="staff" class="coaches section">
     <div class="container">
       <div class="section-header">
@@ -285,7 +456,6 @@
     </div>
   </section>
 
-  <!-- ===== STRUTTURA ===== -->
   <section id="struttura" class="facilities section section--alt">
     <div class="container">
       <div class="section-header">
@@ -337,22 +507,16 @@
     </div>
   </section>
 
-  <!-- ===== CONTATTI ===== -->
   <section id="contatti" class="contact">
     <div class="contact-deco-orb"></div>
     <div class="container">
-
       <div class="contact-top">
         <span class="section-tag section-tag--light">Contattaci</span>
         <h2 class="section-title section-title--light">Entra nel<br><em class="contact-em">percorso.</em></h2>
       </div>
-
       <div class="contact-grid">
-
-        <!-- ── Info panel ── -->
         <div class="contact-info">
           <p class="contact-intro">Compila il form per richiedere una <strong>sessione di prova gratuita</strong> o per avere informazioni sui nostri programmi. Ti risponderemo entro 24 ore.</p>
-
           <div class="contact-methods">
             <div class="cmethod cmethod--static">
               <div class="cmethod-icon">
@@ -366,7 +530,6 @@
                 <span>Via Vestina 346, Montesilvano</span>
               </div>
             </div>
-
             <a href="tel:+393939270855" class="cmethod">
               <div class="cmethod-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -378,7 +541,6 @@
                 <span>+39 393 927 0855</span>
               </div>
             </a>
-
             <a href="mailto:mywayssd@gmail.com" class="cmethod">
               <div class="cmethod-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -391,7 +553,6 @@
                 <span>mywayssd@gmail.com</span>
               </div>
             </a>
-
             <div class="cmethod cmethod--static">
               <div class="cmethod-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -406,10 +567,7 @@
             </div>
           </div>
         </div>
-
-        <!-- ── Form panel ── -->
         <form class="contact-form" id="contact-form" novalidate>
-
           <div class="form-row">
             <div class="form-field">
               <input type="text" id="nome" name="nome" placeholder=" " required autocomplete="given-name">
@@ -420,7 +578,6 @@
               <label for="cognome">Cognome *</label>
             </div>
           </div>
-
           <div class="form-row">
             <div class="form-field">
               <input type="email" id="email" name="email" placeholder=" " required autocomplete="email">
@@ -431,7 +588,6 @@
               <label for="telefono">Numero di telefono *</label>
             </div>
           </div>
-
           <div class="form-field form-field--select">
             <select id="programma" name="programma">
               <option value="" disabled selected></option>
@@ -445,33 +601,26 @@
               <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </div>
           </div>
-
           <div class="form-field form-field--textarea">
             <textarea id="messaggio" name="messaggio" placeholder=" " rows="4"></textarea>
             <label for="messaggio">Messaggio</label>
           </div>
-
           <label class="form-privacy">
             <input type="checkbox" name="privacy" required>
             <span class="privacy-check"></span>
             <span class="privacy-text">Ho letto e accetto il <a href="#">trattamento dei dati personali</a> ai sensi del GDPR *</span>
           </label>
-
           <div class="form-feedback" id="form-feedback" aria-live="polite"></div>
-
           <button type="submit" class="btn btn-primary btn-full">
             Invia Richiesta
             <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="3" y1="10" x2="17" y2="10"/><polyline points="11 4 17 10 11 16"/></svg>
           </button>
-
           <p class="form-note">Risponderemo entro <strong>24 ore</strong> lavorative.</p>
         </form>
-
       </div>
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -539,5 +688,8 @@
   </footer>
 
   <script src="js/main.js"></script>
+
+  -->
+
 </body>
 </html>
